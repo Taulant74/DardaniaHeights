@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login/Register Form</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Sign up</h2>
+        <form method="post" id="registerForm">
+            <input type="text" placeholder="Full Name" name="fullName" required>
+            <input type="email" placeholder="Email" name="email" required>
+            <input type="password" placeholder="Password" name="regPassword" required>
+            <select name="gender" required>
+                <option value="">Choose gender</option>
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+            </select>
+            <input type="date" name="birthdate" required>
+            <button type="submit" name="register"><b>Register</b></button>
+        </form>
+        <p>Already have an account ? <br><a href="login.html">Continue</a></p>
+    </div>
+</body>
+
+</html>

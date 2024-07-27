@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard | By Code Info</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+    * {
+      margin: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+      text-decoration: none;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      background: rgb(219, 219, 219);
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      background: rgb(33, 33, 33);
+      color: #fff;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      padding: 20px;
+      background: #fff;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode .header {
+      background: rgb(48, 48, 48);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo a {
+      color: #000;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 2rem 8rem 2rem 2rem;
+    }
+    body.dark-mode .logo a {
+      color: #fff;
+    }
+    .search_box {
+      display: flex;
+      align-items: center;
+    }
+    .search_box input {
+      padding: 9px;
+      width: 250px;
+      background: rgb(228, 228, 228);
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode .search_box input {
+      background: rgb(55, 55, 55);
+      color: #fff;
+    }
+    .search_box i {
+      padding: 0.66rem;
+      cursor: pointer;
+      color: #fff;
+      background: #000;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      transition: background 0.3s;
+    }
+    body.dark-mode .search_box i {
+      background: rgb(88, 88, 88);
+    }
+    .header-icons {
+      display: flex;
+      align-items: center;
+    }
+    .header-icons i {
+      margin-right: 2rem;
+      cursor: pointer;
+    }
+    .header-icons .account {
+      width: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-icons .account img {
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .container {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    /* Side menubar section */
+    nav {
+      background: #fff;
+      transition: background 0.3s;
+    }
+    body.dark-mode nav {
+      background: rgb(48, 48, 48);
+    }
+    .side_navbar {
+      padding: 1px;
+      display: flex;
+      flex-direction: column;
+    }
+    .side_navbar span {
+      color: gray;
+      margin: 1rem 3rem;
+      font-size: 12px;
+    }
+    body.dark-mode .side_navbar span {
+      color: #bbb;
+    }
+    .side_navbar a {
+      width: 100%;
+      padding: 0.8rem 3rem;
+      font-weight: 500;
+      font-size: 15px;
+      color: rgb(100, 100, 100);
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode .side_navbar a {
+      color: rgb(180, 180, 180);
+    }
+    .links {
+      margin-top: 5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .links a {
+      font-size: 13px;
+    }
+    .side_navbar a:hover {
+      background: rgb(235, 235, 235);
+    }
+    body.dark-mode .side_navbar a:hover {
+      background: rgb(88, 88, 88);
+    }
+    .side_navbar .active {
+      border-left: 2px solid rgb(100, 100, 100);
+    }
+    body.dark-mode .side_navbar .active {
+      border-left: 2px solid rgb(180, 180, 180);
+    }
+    /* Main Body Section */
+    .main-body {
+      width: 70%;
+      padding: 1rem;
+    }
+    .guest-table, .event-table {
+      width: 100%;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode .guest-table, body.dark-mode .event-table {
+      background: rgb(48, 48, 48);
+      color: rgb(180, 180, 180);
+    }
+    .guest-table td, .guest-table th, .event-table td, .event-table th {
+      padding: 0.5rem;
+    }
+    .guest-table th, .event-table th {
+      font-size: 14px;
+      text-align: left;
+    }
+    .guest-table td, .event-table td {
+      font-size: 13px;
+      color: rgb(100, 100, 100);
+    }
+    /* Sidebar Section */
+    .sidebar {
+      width: 15%;
+      padding: 2rem 1rem;
+      background: #fff;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode .sidebar {
+      background: rgb(48, 48, 48);
+    }
+    .sidebar h4 {
+      margin-bottom: 1.5rem;
+    }
+    .sidebar .balance {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .balance .icon {
+      color: #fff;
+      font-size: 20px;
+      border-radius: 6px;
+      margin-right: 1rem;
+      padding: 1rem;
+      background: rgb(37, 37, 37);
+      transition: background 0.3s;
+    }
+    body.dark-mode .balance .icon {
+      background: rgb(55, 55, 55);
+    }
+    .balance .info h5 {
+      font-size: 16px;
+    }
+    .balance .info span {
+      font-size: 14px;
+      color: rgb(100, 100, 100);
+      transition: color 0.3s;
+    }
+    body.dark-mode .balance .info span {
+      color: rgb(180, 180, 180);
+    }
+    .balance .info i {
+      margin-right: 2px;
+    }
+    /* Dark Mode Toggle Button */
+    #dark-mode-toggle {
+      background: #000;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode #dark-mode-toggle {
+      background: #fff;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="#">EasyPay</a>
+      <div class="search_box">
+        <input type="text" placeholder="Search EasyPay">
+        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+    <div class="header-icons">
+      <div class="account">
+        <h4>Jhon Viek</h4>
+      </div>
+    </div>
+    <!-- Dark Mode Toggle Button -->
+    <button id="dark-mode-toggle"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16">
+        <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+      </svg> </button>
+  </header>
+  <div class="container">
+    <nav>
+      <div class="side_navbar">
+        <span>Main Menu</span>
+        <a href="#" class="active" @click.prevent="showGuests">Guests</a>
+        <a href="#" @click.prevent="showEvents">Events</a>
+        <a href="#">Inventory</a>
+        <a href="#">Staff</a>
+        <a href="#">Supplier</a>
+        <a href="#">Employee Schedule</a>
+        <a href="#">Maintenance</a>
+        <div class="links">
+          <span>Quick Link</span>
+          <a href="#">Paypal</a>
+          <a href="#">EasyPay</a>
+          <a href="#">SadaPay</a>
+        </div>
+      </div>
+    </nav>
+    <div class="main-body">
+      <div id="app">
+        <div class="guest-table" v-show="displayGuests">
+          <h2>Guest List</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="guest in guests" :key="guest.id">
+                <td>{{ guest.name }}</td>
+                <td>{{ guest.email }}</td>
+                <td>{{ guest.phone }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="event-table" v-show="displayEvents">
+          <h2>Event List</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="event in events" :key="event.id">
+                <td>{{ event.title }}</td>
+                <td>{{ event.date }}</td>
+                <td>{{ event.location }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <h4>Account Balance</h4>
+      <div class="balance">
+        <div class="icon">
+          <i class="fa fa-dollar-sign"></i>
+        </div>
+        <div class="info">
+          <h5>Total Balance</h5>
+          <span>$10,000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        guests: [
+          { id: 1, name: 'John Doe', email: 'john.doe@example.com', phone: '+1234567890' },
+          { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com', phone: '+1987654321' },
+          { id: 3, name: 'Mike Johnson', email: 'mike.johnson@example.com', phone: '+1122334455' }
+        ],
+        events: [
+          { id: 1, title: 'Conference', date: '2024-06-30', location: 'New York' },
+          { id: 2, title: 'Meeting', date: '2024-07-05', location: 'Los Angeles' },
+          { id: 3, title: 'Seminar', date: '2024-07-15', location: 'Chicago' }
+        ],
+        displayGuests: true,
+        displayEvents: false
+      },
+      methods: {
+        showGuests() {
+          this.displayGuests = true;
+          this.displayEvents = false;
+        },
+        showEvents() {
+          this.displayGuests = false;
+          this.displayEvents = true;
+        }
+      }
+    });
+
+    document.getElementById('dark-mode-toggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html>
